@@ -1,0 +1,397 @@
+// Variables
+$body-bg-color: black;
+$nav-bg-color: rgba(207, 185, 145, 255);
+$nav-text-color: black;
+$button-bg-color: black;
+$button-color: white;
+$body-font: Arial, sans-serif;
+$body-font-color: white;
+$footer-font-color: black;
+
+// Base styles
+body {
+  background-color: $body-bg-color;
+  font-family: $body-font;
+  color: $body-font-color;
+}
+
+// Navigation styles
+.mastodon-label,
+.main-nav ul,
+.main-nav .login-signup {
+  display: flex; 
+  align-items: center; 
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $nav-bg-color;
+  height: 70px;
+  padding: 0 10px;
+  
+  ul {
+    background-color: $nav-bg-color;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      
+      a {
+        color: $nav-text-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.clear-event {
+  background-color: rgba(207, 185, 145, 255) ;
+  color: white;
+  border-radius: 3px;
+  padding: 2px 5px;
+  border: none;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.clear-event:hover {
+  background-color: white;
+  color: rgba(207, 185, 145, 255) ;
+}
+
+.remove-event {
+  background-color: orange;
+  color: white;
+  border-radius: 2px;
+  padding: 1px 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.remove-event:hover {
+  background-color: darkorange;
+}
+
+
+.login-signup {
+  margin-left: auto;
+  
+  a {
+    background-color: $button-bg-color;
+    color: $button-color;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 9px 19px;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+    
+    &:hover {
+      background-color: $button-bg-color;
+      color: $button-color;
+    }
+  }
+}
+
+.mastodon-label {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  margin: 20px;
+}
+
+// Footer styles
+.footer-container {
+  background-color: rgba(207, 185, 145, 255);
+  color: $footer-font-color;
+  height: 80px;
+  bottom: 0; 
+  left: 0;
+  right: 0;
+  width: 96.8%;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 20px;
+  overflow: hidden;
+  transition: bottom 0.3s ease; /* Add smooth transition effect */
+}
+
+.left-column {
+  float: left;
+}
+
+.right-column {
+  float: right;
+}
+
+.left-column, .right-column {
+  flex: 1;
+  text-align: left;
+}
+
+footer a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 20px;
+}
+
+.right-column a:hover {
+  color: white;
+}
+
+// Dashboard elements start
+// Dashboard elements end
+
+// Club elements start
+h1 {
+  margin: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+
+  .officer {
+    margin-bottom: 20px;
+
+    .mail {
+      font-weight: bold;
+      color: #00f;
+    }
+
+    .previous-page-button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.club-container {
+  border: 1px solid #ddd;
+  margin: 10px;
+  padding: 10px;
+  background-color: rgb(184, 168, 77);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(207, 119, 47, 0.8);
+  }
+
+  img {
+    width: 10%;
+    max-width: 10%;
+    height: auto;
+    max-height: 10%;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #090000ee;
+  border: 1px solid #cccccc00;
+  padding: 20px;
+  max-width: 300px;
+  z-index: 9999; /* Ensure pop-up appears above other content */
+}
+
+.popup h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.popup p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.popup img {
+  max-width: 100%;
+}
+// Club elements end
+
+// Event elements start
+.event-images img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 250px;
+  transition: transform 0.3s ease;
+}
+.event-images img:hover {
+  transform: scale(1.1); 
+  filter: brightness(1.2);
+  opacity: 0.8;
+  box-shadow: 0px 0px 10px rgba(207, 185, 145, 255);
+  border-radius: 20%; 
+  margin-bottom: 20px;
+}
+
+.event-title:hover 
+{
+  transform: scale(1.1); 
+  filter: brightness(1.2);
+  opacity: 0.8;
+}
+
+.event-title, .event-date {
+  text-decoration: none;
+  top: 50%;
+  left: 50%;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  background-color: white(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.event-date, .event-description, .event-time, .event-location {
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+#ArtEvents{
+  border: #9a7b17;
+}
+.search-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  //background-color: rgb(123, 36, 4);
+  width: 400px;
+  padding: 20px;
+  border-radius: 4px;
+  margin-left: 400px;
+  position: absolute;
+  top: 60%;
+}
+
+#searchForm {
+  width: 300px; // Adjust width as needed
+}
+
+
+#categoryInput {
+  width: 100%;
+  box-sizing: border-box; // Ensure padding and border are included in the width
+  margin-bottom: 10px; // Add spacing between input and button
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: grey;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: rgba(207, 185, 145, 255);
+}
+
+.Banner{
+  max-width: 100%;
+  width: 100%;
+  height: 250px;
+}
+
+.Events-Banner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  background-color: white(0, 0, 0, 0.5);
+  padding: 10px;
+}
+.your-event-link, .featured-event-link, .art-event-link {
+  margin-right: 50px; // Adjust as needed
+}
+
+.ArtEvents, #YourEvents, #SearchResult{
+  background-color: black;
+  padding: 20px;
+  margin: 20px;
+  border-bottom: solid rgba(207, 185, 145, 255) 2px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.YourEvent-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.WorkshopsEvents-item, .Events-item{
+  width: calc(30% - 20px); /* Adjust width as needed */
+  margin: 5px;
+  padding: 10px;
+  border: solid rgba(207, 185, 145, 255) 2px;
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+#WorkshopsEvents-container, #Events-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+}
+
+.YourEvent-item {
+  width: calc(20% - 20px); /* Adjust width as needed */
+  margin: 10px;
+  padding: 20px;
+  border: solid rgba(207, 185, 145, 255) 2px;
+}
+
+
+.WorkshopsEvents:hover {
+  transform: scale(1.1); 
+  filter: brightness(1.2);
+  opacity: 0.8;
+  border-radius: 20%; 
+  margin-bottom: 20px;
+}
+
+#Search{
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px; 
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  height: 40px;
+  position: absolute;
+  top: 70%;
+  left: 40%; 
+  align-items: center;
+  overflow: hidden;
+}
