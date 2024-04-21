@@ -488,7 +488,7 @@ figcaption {
   max-width: 50%;
 }
 
-.event-images img {
+.event-images img, .club-images {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -506,7 +506,7 @@ figcaption {
   margin: 10px; /* Adds space between the filter bar and the results */
 }
 
-.event-images img:hover {
+.event-images img:hover, .club-images img:hover {
   transform: scale(1.1);
   filter: brightness(1.2);
   opacity: 0.8;
@@ -515,7 +515,7 @@ figcaption {
   margin-bottom: 20px;
 }
 
-.event-title:hover {
+.event-title:hover, .club-title:hover {
   transform: scale(1.1);
   filter: brightness(1.2);
   opacity: 0.8;
@@ -610,11 +610,11 @@ input[type=submit]:hover {
   padding: 10px;
 }
 
-.your-event-link, .featured-event-link, .art-event-link {
+.your-event-link, .featured-event-link, .art-event-link, .featured-club-link {
   margin-right: 50px;
 }
 
-.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs {
+.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs, #FeaturedClubs {
   background-color: black;
   padding: 20px;
   margin: 30px;

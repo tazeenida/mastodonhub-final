@@ -1,6 +1,7 @@
 import React from 'react';
 import headerImage from '../images/header img.jpg'
 import FeaturedEvents from './FeaturedEvents';
+import FeaturedClubs from './FeaturedClubs';
 import ClubsPage from './DashboardClubs';
 const Dashboard = () => {
   return (
@@ -14,7 +15,7 @@ const Dashboard = () => {
       </div>
       <main>
         <div className="clubs-container">
-          <ClubsPage/>
+          <FeaturedClubs/>
           <FeaturedEvents/>
         </div>
       </main>
