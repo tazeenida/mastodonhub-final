@@ -234,13 +234,7 @@ img {
   box-shadow: 0 5px 15px rgb(207, 185, 145); /* Add box-shadow effect on hover */
 }
 
-.club:hover img {
-  transform: scale(1.1); /* Enlarge the image on hover */
-}
 
-figcaption {
-  margin-top: 10px; /* Add some space between image and caption */
-}
 
 /* Styles for captions */
 figcaption {
@@ -252,6 +246,7 @@ figcaption {
   color: white;
   padding: 10px;
   margin: 0;
+  margin-top: 10px;
   opacity: 0; /* Initially hide caption */
   transition: opacity 0.3s ease; /* Add transition for smooth visibility */
   border-radius: 6px;
@@ -270,9 +265,12 @@ figcaption {
 
 /* Add this to create a border between clubs and events */
 .events-container {
-  border-left: 6px solid rgb(207, 185, 145);
-  padding-left: 10px;
-  margin-top: 40px;
+  display: flex;
+  flex-direction: row; /* Horizontal alignment */
+  justify-content: flex-start; /* Align items from the left */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Add some space between events */
+  padding: 20px;
 }
 
 
@@ -422,39 +420,13 @@ figcaption {
 #signup-form input[type=email],
 #signup-form input[type=password],
 #signup-form button[type=submit] { /* Apply styles to buttons */
-  width: 100%;
+  width: 420px;
   padding: 0.4rem;
   margin-bottom: 1rem;
   border: none;
-  background-color: beige;
-}
-
-#signup-form button[type=submit] {
-  width: 100%;
-  padding: 0.5rem; /* Adjust padding as needed */
-  background-color: rgb(207, 185, 145);;
   color: black;
-  border: none;
-  width: 420px;
+  background-color:  rgb(207, 185, 145);;;
   cursor: pointer;
-}
-
-.popup {
-  position: fixed;
-  top: 0; /* Position at the top of the viewport */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%);
-  width: 100%; /* Adjust width as needed */
-  max-width: 400px; /* Set maximum width */
-  background-color: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  display: block;
-  text-align: center; /* Center text horizontally */
-  font-size: 16px; /* Adjust font size as needed */
 }
 
 .login-link {
@@ -583,14 +555,11 @@ figcaption {
   padding: 10px;
 }
 
-#ArtEvents, #clubs{
-  border: #9a7b17;
-}
+
 .search-container {
   display: flex;
   justify-content: center; 
   align-items: center;
-  //background-color: rgb(123, 36, 4);
   width: 400px;
   padding: 20px;
   border-radius: 4px;
@@ -659,7 +628,7 @@ input[type="submit"]:hover {
   margin-right: 50px; // Adjust as needed
 }
 
-.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs, #FeaturedClubs{
+.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs, #FeaturedClubs, .MusicEvents{
   background-color: black;
   padding: 20px;
   margin: 30px;
@@ -673,16 +642,18 @@ input[type="submit"]:hover {
   flex-wrap: wrap;
 }
 
-.WorkshopsEvents-item, .Events-item{
+.WorkshopsEvents-item, .Events-item, .events-item{
   width: calc(30% - 20px); /* Adjust width as needed */
   margin: 5px;
-  padding: 10px;
+  padding: 20px;
   border: solid rgba(207, 185, 145, 255) 2px;
   box-sizing: border-box; /* Include padding and border in the width calculation */
   flex: 1 1 200px; /* Allow items to grow/shrink */
   text-decoration: none; /* Remove underline */
   color: #000;
   text-align: center;
+  display: flex;
+  flex-direction: column
   
 }
 
@@ -690,7 +661,12 @@ input[type="submit"]:hover {
   display: flex;
   flex-wrap: wrap; 
   justify-content: space-between;
-  margin-right: 20px;
+  gap: 30px;
+}
+
+#Events-container img{
+  width: 250px;
+  background-color: black;
 }
 
 .YourEvent-item {

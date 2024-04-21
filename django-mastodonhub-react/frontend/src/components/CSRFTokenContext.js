@@ -11,7 +11,7 @@ export const CSRFTokenProvider = ({ children }) => {
   useEffect(() => {
     const fetchCsrfToken = async () => {
       try {
-        const response = await axios.get('/backend/user/get_csrf_token/');
+        const response = await axios.get('/user/get_csrf_token/');
         console.log('CSRF token fetched: ', response.data);
         setCsrfToken(response.data); // Assuming the token is in the response body
       } catch (error) {
