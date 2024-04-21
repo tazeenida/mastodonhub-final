@@ -597,6 +597,19 @@ input[type=submit]:hover {
   height: 400px;
 }
 
+.Clubs-Banner {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  background-color: white(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
 .Events-Banner {
   position: absolute;
   top: 50%;
@@ -640,10 +653,11 @@ input[type=submit]:hover {
   text-align: center;
 }
 
-#WorkshopsEvents-container, #Events-container {
+#WorkshopsEvents-container, #Events-container, #Clubs-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-right: 20px;
 }
 
 .YourEvent-item {

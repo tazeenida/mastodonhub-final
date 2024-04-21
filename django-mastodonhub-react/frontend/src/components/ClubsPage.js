@@ -4,6 +4,7 @@ import axios from 'axios';
 import ClubModal from './clubsModal';
 import ClubsFilter from './clubsFilter';
 import '../styles.css';
+import clubsBanner from '../images/clubsBanner.jpg'
 
 function ClubsPage() {
   const [clubs, setClubs] = useState([]);
@@ -56,20 +57,27 @@ function ClubsPage() {
 
   return (
     <main>
-      <section id="FeaturedEvents" className="featured-events-section">
-      <ClubsFilter onFilterChange={handleFilterChange} />
-        <header>
-        <h1 class="club-title">Clubs </h1>
+        <section id="Banner">
+        <img src={clubsBanner} alt="Header" width="100%" height="400px" />
+        <div className="Clubs-Banner">Discover exciting Clubs with MastodonHub</div>
+      </section>
+      <header>
+        
         </header>
-        <section className="filtered-results">
+      <section id="FeaturedClubs" className="featured-events-section">
+        <section>
+      <ClubsFilter onFilterChange={handleFilterChange} />
+      </section>
+        <section className="filtered-results" styles={{margin:'20px'}}>
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (
             <p>Error: {error.message}</p>
           ) : (
-            <div id="Events-container">
+            <div id="Clubs-container">
               {filteredClubs.map((club) => (
                 <Link key={club.id} className="Events-item" onClick={() => handleClubsClick(club)}>
+                  <div>
                   <img
                     className="event-images"
                     src={club.ImageUrl}
@@ -77,6 +85,7 @@ function ClubsPage() {
                     style={{ width: '200px', height: '200px' }}
                   />
                   <div className="event-title">{club.Title}</div>
+                  </div>
                   <ClubModal isOpen={modal} toggle={() => setModal(false)} activeItem={activeItem} />
                 </Link>
               ))}
