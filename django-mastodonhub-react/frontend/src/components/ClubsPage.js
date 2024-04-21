@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import ClubModal from "./clubsModal"; // Import ClubModal component
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import ClubModal from './clubsModal';
+import ClubsFilter from './clubsFilter';
+import '../styles.css';
 
-const ClubsPage = () => {
-  const [clubList, setClubList] = useState([]);
-  const [activeItem, setActiveItem] = useState({});
-  const [modal, setModal] = useState(false);
+function ClubsPage() {
+  const [clubs, setClubs] = useState([]);
+  const [filteredClubs, setFilteredClubs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [activeItem, setActiveItem] = useState({});
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const fetchClubs = async () => {
       setIsLoading(true);
       setError(null);
-
       try {
-        const response = await axios.get("/api/mastodonhub/clubs/");
-        setClubList(response.data);
+        const response = await axios.get('/api/mastodonhub/clubs/');
+        setClubs(response.data);
+        setFilteredClubs(response.data); // Default to all clubs
       } catch (error) {
-        console.error("Error fetching clubs:", error);
         setError(error);
+        console.error('Error fetching clubs:', error);
       } finally {
         setIsLoading(false);
       }
@@ -28,37 +32,60 @@ const ClubsPage = () => {
     fetchClubs();
   }, []);
 
-  // Function to handle club item click and set active item for modal
-  const handleClubClick = (club) => {
+  const handleFilterChange = (selectedCategory, searchTerm) => {
+    let filtered = clubs;
+
+    if (selectedCategory) {
+      filtered = filtered.filter((club) => club.Category === selectedCategory);
+    }
+
+    if (searchTerm && searchTerm.trim() !== '') {
+      filtered = filtered.filter((club) =>
+        club.Title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredClubs(filtered); // Update the filtered list based on filters
+  };
+
+  const handleClubsClick = (club) => {
+    console.log('Opening modal for', club);
     setActiveItem(club);
     setModal(true);
   };
 
   return (
-    <main className="container">
-    
-      <h1>ClubRec</h1>
-      {isLoading && <p>Loading clubs...</p>}
-      {error && <p>Error fetching clubs: {error.message}</p>} 
-      <div>
-        <ul>
-          {clubList.map((item) => (
-            <li
-              key={item.id}
-              className="club-container"
-              onClick={() => handleClubClick(item)}
-            >
-              <div>{item.Title}</div>
-              <img className="event-images" src={item.ImageUrl} alt="Event" />
-              
-            </li>
-          ))}
-        </ul>
-      
-      <ClubModal isOpen={modal} toggle={() => setModal(false)} activeItem={activeItem} />
-      </div>
+    <main>
+      <section id="FeaturedEvents" className="featured-events-section">
+      <ClubsFilter onFilterChange={handleFilterChange} />
+        <header>
+          <h1 className="club-title">Clubs</h1>
+        </header>
+        <section className="filtered-results">
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : error ? (
+            <p>Error: {error.message}</p>
+          ) : (
+            <div id="Events-container">
+              {filteredClubs.map((club) => (
+                <Link key={club.id} className="Events-item" onClick={() => handleClubsClick(club)}>
+                  <img
+                    className="event-images"
+                    src={club.ImageUrl}
+                    alt={club.Title}
+                    style={{ width: '200px', height: '200px' }}
+                  />
+                  <div className="event-title">{club.Title}</div>
+                  <ClubModal isOpen={modal} toggle={() => setModal(false)} activeItem={activeItem} />
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
+      </section>
     </main>
   );
-};
+}
 
 export default ClubsPage;

@@ -1,47 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import FeatureModal from './FeatureModal';
 
 function FeaturedEvents() {
-
-  const handleAddToCalendar = (event) => {
-    // Load calendar events from local storage
-    const storedEvents = localStorage.getItem('calendarEvents');
-    const events = storedEvents ? JSON.parse(storedEvents) : [];
-
-    // Check if the event title already exists in the calendarEvents array
-    const isDuplicate = events.some((e) => e.title === event.title);
-
-    // If the event title already exists, display a message and return
-    if (isDuplicate) {
-      alert('Event already added to calendar.');
-      return;
-    }
-
-    // Otherwise, add the event to the calendarEvents array
-    events.push(event);
-    localStorage.setItem('calendarEvents', JSON.stringify(events));
-  };
-
-  const handleRemoveFromCalendar = (eventTitle) => {
-    // Remove the event from the calendarEvents array
-    const storedEvents = localStorage.getItem('calendarEvents');
-    const events = storedEvents ? JSON.parse(storedEvents) : [];
-    const updatedEvents = events.filter((e) => e.title !== eventTitle);
-    localStorage.setItem('calendarEvents', JSON.stringify(updatedEvents));
-  };
-
   const [FeaturedEvents, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [activeItem, setActiveItem] = useState({});
+  const [modal, setModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/mastodonhub/events/");
+        const response = await axios.get("/api/mastodonhub/events/");
         setEvents(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -61,23 +35,84 @@ function FeaturedEvents() {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+
+  const handleFeatureClick = (FeaturedEvents) => {
+    console.log('Opening modal for', FeaturedEvents);
+    setActiveItem(FeaturedEvents);
+    setModal(true);
+  };
+  
+  const generateICalEvent = (event) => {
+    const { Title, Date: eventDate, StartTime, EndTime, Location, Description } = event;
+  
+    // Validate event date and times
+    if (!eventDate || !StartTime || !EndTime) {
+      throw new Error("Invalid date or time values");
+    }
+  
+    const startDateTime = new Date(`${eventDate}T${StartTime}`);
+    const endDateTime = new Date(`${eventDate}T${EndTime}`);
+  
+    if (isNaN(startDateTime.getTime()) || isNaN(endDateTime.getTime())) {
+      throw new Error("Invalid date object created");
+    }
+  
+    // Format dates to be used in iCal
+    const formatDate = (date) => {
+      // Ensure times are in UTC and formatted correctly
+      return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+  
+    return `BEGIN:VCALENDAR
+  VERSION:2.0
+  PRODID:-//MastodonHub
+  BEGIN:VEVENT
+  UID:${new Date().toISOString()}
+  DTSTAMP:${formatDate(new Date())}
+  DTSTART:${formatDate(startDateTime)}
+  DTEND:${formatDate(endDateTime)}
+  SUMMARY:${Title}
+  DESCRIPTION:${Description}
+  LOCATION:${Location}
+  END:VEVENT
+  END:VCALENDAR`;
+  };
+  
+  const downloadICalEvent = (fileName, icalData) => {
+    const blob = new Blob([icalData], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+  const handleDownloadCalendar = (event) => {
+    const icalData = generateICalEvent(event);
+    downloadICalEvent(`${event.Title}.ics`, icalData);
+  };
+
   const filteredFeaturedEvents = FeaturedEvents.filter((event) => event.Category === 'Featured');
+  
   return (
     <div>
+      <h1 class="event-title">Featured Events</h1>
       <section id="FeaturedEvents">
-        <h1>Featured Events</h1>
         <div style={{ display: 'flex', flexDirection: 'row', backgroundColor: 'black' }} className="event-images">
           {filteredFeaturedEvents.map((FeaturedEvents) => (
-            <Link className="featured-event-link">
+            <Link className="featured-event-link"  onClick={() => handleFeatureClick(FeaturedEvents)}>
               <img className="event-images" src={FeaturedEvents.ImageUrl} alt="Event" />
-                <div className="event-title">{FeaturedEvents.Title}</div>
-              <div className="event-date">{FeaturedEvents.Date}</div>
-              <div className="event-description">{FeaturedEvents.Description}</div>
-              <div className="event-time">{FeaturedEvents.StartTime} - {FeaturedEvents.EndTime}</div>
-              <div className="event-location">{FeaturedEvents.Location}</div>
+              <div className="event-title">{FeaturedEvents.Title}</div>
+              <button onClick={() => handleDownloadCalendar(FeaturedEvents)}>Add to Calendar</button>
             </Link>
           ))}
+          <FeatureModal isOpen={modal} toggle={() => setModal(false)} activeItem={activeItem} />
         </div>
+
       </section>
     </div>
   );
