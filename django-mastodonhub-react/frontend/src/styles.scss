@@ -275,6 +275,8 @@ figcaption {
   margin-top: 40px;
 }
 
+
+
 #upcoming-events {
   margin-top: 40px; /* Add some space above the section */
   color: white;
@@ -628,6 +630,18 @@ input[type="submit"]:hover {
   width: 100%;
   height: 400px;
 }
+.Clubs-Banner{
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-40%, -50%);
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  background-color: white(0, 0, 0, 0.5);
+  padding: 10px;
+}
 
 .Events-Banner {
   position: absolute;
@@ -672,10 +686,11 @@ input[type="submit"]:hover {
   
 }
 
-#WorkshopsEvents-container, #Events-container {
+#WorkshopsEvents-container, #Events-container, #Clubs-container {
   display: flex;
   flex-wrap: wrap; 
   justify-content: space-between;
+  margin-right: 20px;
 }
 
 .YourEvent-item {

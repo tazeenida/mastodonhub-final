@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useCSRFToken } from './CSRFTokenContext';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Login() {
+const Login = () => {
   const csrfToken = useCSRFToken();
 
     const navigate = useNavigate();
@@ -42,15 +42,16 @@ function Login() {
     <main id="login-main">
       <h1 id="login-heading">Login</h1>
       <form onSubmit={handleFormSubmit} id="login-form">
-        <label htmlFor="username" className="form-label">Username</label>
-        <input 
-          type="text"
-          name="username"
-          value={loginData.username}
-          onChange={handleChange}
-          placeholder="Username"
-          required
-        />
+        <label htmlFor="email" className="form-label">Username</label>
+        <input
+            type="text"
+            id="email" 
+            name="username"
+            value={loginData.username}
+            onChange={handleChange}
+            placeholder="Username"
+            required
+                />
         <label htmlFor="password" className="form-label">Password</label>
         <input 
           type="password"
