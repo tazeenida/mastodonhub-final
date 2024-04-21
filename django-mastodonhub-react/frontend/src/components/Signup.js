@@ -25,7 +25,7 @@ const SignUp = () => {
         console.log('Registering user', userData, csrfToken);
         try {
             const response = await axios.post(
-                'backend/user/create_user/',
+                '/user/create_user/',
                 userData,
                 {
                     headers: {

@@ -4,34 +4,6 @@ import axios from 'axios';
 
 
 function WorkshopEvents() {
-
-  const handleAddToCalendar = (event) => {
-    // Load calendar events from local storage
-    const storedEvents = localStorage.getItem('calendarEvents');
-    const events = storedEvents ? JSON.parse(storedEvents) : [];
-
-    // Check if the event title already exists in the calendarEvents array
-    const isDuplicate = events.some((e) => e.title === event.title);
-
-    // If the event title already exists, display a message and return
-    if (isDuplicate) {
-      alert('Event already added to calendar.');
-      return;
-    }
-
-    // Otherwise, add the event to the calendarEvents array
-    events.push(event);
-    localStorage.setItem('calendarEvents', JSON.stringify(events));
-  };
-
-  const handleRemoveFromCalendar = (eventTitle) => {
-    // Remove the event from the calendarEvents array
-    const storedEvents = localStorage.getItem('calendarEvents');
-    const events = storedEvents ? JSON.parse(storedEvents) : [];
-    const updatedEvents = events.filter((e) => e.title !== eventTitle);
-    localStorage.setItem('calendarEvents', JSON.stringify(updatedEvents));
-  };
-
   const [WorkshopEvents, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -61,6 +33,40 @@ function WorkshopEvents() {
   if (error) {
     return <p>Error: {error.message}</p>;
   }
+  const addEventToCalendar = (event) => {
+    const storedEvents = localStorage.getItem('calendarEvents');
+    const currentEvents = storedEvents ? JSON.parse(storedEvents) : [];
+
+    const isDuplicate = currentEvents.some(
+      (e) => e.title === event.Title
+    );
+
+    if (isDuplicate) {
+      alert('Event already added.');
+      return;
+    }
+
+    currentEvents.push({
+      title: event.Title,
+      description: event.Description,
+      location: event.Location,
+      startTime: event.StartTime,
+      endTime: event.EndTime,
+      imageUrl: event.ImageUrl,
+    });
+
+    localStorage.setItem('calendarEvents', JSON.stringify(currentEvents));
+    alert('Event successfully added.');
+  };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Error: {error.message}</p>;
+  }
+
   const filteredWorkshopEvents = WorkshopEvents.filter((event) => event.Category === 'Workshops');
   return (
     <div>
@@ -76,8 +82,7 @@ function WorkshopEvents() {
               <div className="event-description">{WorkshopEvents.Description}</div>
               <div className="event-time">{WorkshopEvents.StartTime} - {WorkshopEvents.EndTime}</div>
               <div className="event-location">{WorkshopEvents.Location}</div>
-              <button onClick={() => handleAddToCalendar(WorkshopEvents)} style={{ marginRight: '5px' }}>Add to Calendar</button>
-              <button onClick={() => handleRemoveFromCalendar(WorkshopEvents.title)}>Remove from Calendar</button>
+              <button onClick={() => addEventToCalendar(WorkshopEvents)}>Add Event</button>
             </Link>
           ))}
         </div>
