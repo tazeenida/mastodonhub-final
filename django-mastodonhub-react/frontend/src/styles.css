@@ -488,13 +488,13 @@ figcaption {
   max-width: 50%;
 }
 
-.event-images img {
+.event-images img, .club-images {
   display: block;
   margin-left: auto;
   margin-right: auto;
   transition: transform 0.3s ease;
-  width: 100px; /* Fixed width for consistency */
-  height: 100px; /* Fixed height for consistency */
+  width: 200px; /* Fixed width for consistency */
+  height: 200px; /* Fixed height for consistency */
   -o-object-fit: cover;
      object-fit: cover; /* Ensures the image covers the entire area without distortion */
   border-radius: 10px; /* Matches the border-radius of the container */
@@ -503,10 +503,10 @@ figcaption {
 
 .filtered-results {
   padding: 40px;
-  margin: 40px; /* Adds space between the filter bar and the results */
+  margin: 10px; /* Adds space between the filter bar and the results */
 }
 
-.event-images img:hover {
+.event-images img:hover, .club-images img:hover {
   transform: scale(1.1);
   filter: brightness(1.2);
   opacity: 0.8;
@@ -515,13 +515,13 @@ figcaption {
   margin-bottom: 20px;
 }
 
-.event-title:hover {
+.event-title:hover, .club-title:hover {
   transform: scale(1.1);
   filter: brightness(1.2);
   opacity: 0.8;
 }
 
-.event-title, .event-date {
+.event-title, .club-title {
   text-decoration: none;
   top: 50%;
   left: 50%;
@@ -531,14 +531,6 @@ figcaption {
   background-color: white(0, 0, 0, 0.5);
   padding: 10px;
   margin: 20px;
-}
-
-.club-title {
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  color: white; /* White text for contrast against the black background */
-  margin-bottom: 10px; /* Space below the title */
 }
 
 .event-date, .event-description, .event-time, .event-location {
@@ -618,11 +610,11 @@ input[type=submit]:hover {
   padding: 10px;
 }
 
-.your-event-link, .featured-event-link, .art-event-link {
+.your-event-link, .featured-event-link, .art-event-link, .featured-club-link {
   margin-right: 50px;
 }
 
-.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs {
+.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs, #FeaturedClubs {
   background-color: black;
   padding: 20px;
   margin: 30px;
