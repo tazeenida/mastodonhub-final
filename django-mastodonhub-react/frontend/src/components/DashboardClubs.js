@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ClubModal from './clubsModal';
-import ClubsFilter from './clubsFilter';
 import '../styles.css';
 
 function ClubsPage() {
   const [clubs, setClubs] = useState([]);
-  const [filteredClubs, setFilteredClubs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [activeItem, setActiveItem] = useState({});
@@ -20,7 +18,6 @@ function ClubsPage() {
       try {
         const response = await axios.get('/api/mastodonhub/clubs/');
         setClubs(response.data);
-        setFilteredClubs(response.data); // Default to all clubs
       } catch (error) {
         setError(error);
         console.error('Error fetching clubs:', error);
@@ -30,23 +27,7 @@ function ClubsPage() {
     };
 
     fetchClubs();
-  }, []);
-
-  const handleFilterChange = (selectedCategory, searchTerm) => {
-    let filtered = clubs;
-
-    if (selectedCategory) {
-      filtered = filtered.filter((club) => club.Category === selectedCategory);
-    }
-
-    if (searchTerm && searchTerm.trim() !== '') {
-      filtered = filtered.filter((club) =>
-        club.Title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-
-    setFilteredClubs(filtered); // Update the filtered list based on filters
-  };
+  }, []); // Ensure this line has only one closing brace
 
   const handleClubsClick = (club) => {
     console.log('Opening modal for', club);
@@ -57,18 +38,18 @@ function ClubsPage() {
   return (
     <main>
       <section id="FeaturedEvents" className="featured-events-section">
-      <ClubsFilter onFilterChange={handleFilterChange} />
         <header>
-        <h1 class="club-title">Clubs </h1>
+          <h1 className="club-title">Clubs</h1>
         </header>
-        <section className="filtered-results">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error.message}</p>
-          ) : (
-            <div id="Events-container">
-              {filteredClubs.map((club) => (
+
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error.message}</p>
+        ) : (
+          <section className="filtered-results">
+            <div id="Events-container" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
+              {clubs.map((club) => (
                 <Link key={club.id} className="Events-item" onClick={() => handleClubsClick(club)}>
                   <img
                     className="event-images"
@@ -77,12 +58,14 @@ function ClubsPage() {
                     style={{ width: '200px', height: '200px' }}
                   />
                   <div className="event-title">{club.Title}</div>
-                  <ClubModal isOpen={modal} toggle={() => setModal(false)} activeItem={activeItem} />
                 </Link>
               ))}
             </div>
-          )}
-        </section>
+            {modal && (
+              <ClubModal isOpen={modal} toggle={() => setModal(false)} activeItem={activeItem} />
+            )}
+          </section>
+        )}
       </section>
     </main>
   );

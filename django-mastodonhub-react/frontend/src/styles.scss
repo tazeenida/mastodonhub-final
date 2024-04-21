@@ -523,8 +523,8 @@ figcaption {
   margin-left: auto;
   margin-right: auto;
   transition: transform 0.3s ease;
-  width: 100px; /* Fixed width for consistency */
-  height: 100px; /* Fixed height for consistency */
+  width: 200px; /* Fixed width for consistency */
+  height: 200px; /* Fixed height for consistency */
   object-fit: cover; /* Ensures the image covers the entire area without distortion */
   border-radius: 10px; /* Matches the border-radius of the container */
   transition: transform 0.2s; 
@@ -532,7 +532,7 @@ figcaption {
 
 .filtered-results {
   padding: 40px;
-  margin: 40px; /* Adds space between the filter bar and the results */
+  margin: 10px; /* Adds space between the filter bar and the results */
 }
 
 
@@ -552,7 +552,7 @@ figcaption {
   opacity: 0.8;
 }
 
-.event-title, .event-date {
+.event-title, .club-title{
   text-decoration: none;
   top: 50%;
   left: 50%;
@@ -564,13 +564,6 @@ figcaption {
   margin: 20px;
 }
 
-.club-title {
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  color: white; /* White text for contrast against the black background */
-  margin-bottom: 10px; /* Space below the title */
-}
 .event-date, .event-description, .event-time, .event-location {
   text-decoration: none;
   color: white;

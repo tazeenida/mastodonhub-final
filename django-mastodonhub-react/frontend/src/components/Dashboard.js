@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import headerImage from '../images/header img.jpg'
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import FeaturedEvents from './FeaturedEvents';
-import ClubsPage from './ClubsPage';
+import ClubsPage from './DashboardClubs';
 const Dashboard = () => {
   return (
     <div>
