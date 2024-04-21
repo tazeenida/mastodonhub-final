@@ -150,57 +150,345 @@ footer a {
 }
 
 // Dashboard elements start
+img {
+  max-width: 100%;
+  height: auto;
+  width: 950px;
+  display: block; /* Ensures that image is displayed as a block element */
+  margin: 0 auto; /* Centers the image horizontally */
+  border-radius: 5px; /* Adds rounded corners to the image */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+}
+
+/* Additional CSS for overlaying text on the image */
+#header-image-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.header-image-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border-radius: 10px;
+}
+.clubs-container{
+  .clubs-container img{
+    max-width: 250px;
+    max-height: 250px;
+  }
+}
+#clubs h2 {
+  text-align: left; /* Center-align the heading */
+  font-size: 24px; /* Adjust the font size */
+  /*font-weight: bold;*/
+  color: white; /* Text color */
+  margin-bottom: 20px; /* Add some bottom margin for spacing */
+}
+
+/* Additional CSS for styling clubs */
+.clubs-container-dashboard {
+  padding: 10px;
+  background-color: black; /* Light gray background color */
+  border: 6px solid rgb(207, 185, 145); /* Light gray border */
+  border-radius: 5px;
+  margin-top: 40px;
+}
+
+#clubs {
+  margin-bottom: 40px;
+}
+
+.clubs-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.club {
+  width: calc(30.03% - 20px); /* Adjust based on number of clubs per row */
+  //margin: 10px;
+  /*border: 2px solid #ccc; /* Add border */
+  border-radius: 10px; /* Add border radius */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition on hover */
+  position: relative; /* Position club items relatively */
+  padding: 10px; /* Add padding */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  text-align: center; /* Center-align club content */
+}
+
+.club img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease; /* Add smooth transition on hover */
+}
+
+.club:hover {
+  transform: translateY(-5px); /* Raise the club item slightly on hover */
+  box-shadow: 0 5px 15px rgb(207, 185, 145); /* Add box-shadow effect on hover */
+}
+
+.club:hover img {
+  transform: scale(1.1); /* Enlarge the image on hover */
+}
+
+figcaption {
+  margin-top: 10px; /* Add some space between image and caption */
+}
+
+/* Styles for captions */
+figcaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Add background color to caption for readability */
+  color: white;
+  padding: 10px;
+  margin: 0;
+  opacity: 0; /* Initially hide caption */
+  transition: opacity 0.3s ease; /* Add transition for smooth visibility */
+  border-radius: 6px;
+}
+
+.club:hover {
+  transform: scale(1.1); /* Scale up the club on hover */
+}
+
+/* Show caption on hover */
+.club:hover figcaption {
+  opacity: 1;
+}
+
+/* Additional CSS for styling upcoming events */
+
+/* Add this to create a border between clubs and events */
+.events-container {
+  border-left: 6px solid rgb(207, 185, 145);
+  padding-left: 10px;
+  margin-top: 40px;
+}
+
+#upcoming-events {
+  margin-top: 40px; /* Add some space above the section */
+  color: white;
+}
+
+.events-wrapper {
+  overflow: auto; /* Ensure the events wrapper can contain floated elements */
+  display: flex; /* Use flexbox for horizontal layout */
+  justify-content: space-between; /* Evenly distribute space between events */
+  flex-wrap: wrap; /* Allow events to wrap to the next row */
+}
+
+.event {
+  width: calc(20% - 20px); /* Adjust based on number of events per row */
+  margin: 10px;
+  border: 2px solid rgb(207, 185, 145); /* Add border */
+  border-radius: 10px; /* Add border radius */
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition on hover */
+  position: relative; /* Position event items relatively */
+  padding: 10px; /* Add padding */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  text-align: center; /* Center-align event content */
+  display: inline-block; /* Ensure events are displayed inline */
+  vertical-align: top; /* Align events at the top of the container */
+  cursor: pointer;
+}
+
+.event:hover {
+  transform: scale(1.05); /* Scale up the event on hover */
+}
+
+.event img {
+  width: 100%; /* Ensure images fill the container */
+  height: 150px; /* Set a fixed height for the images */
+  display: block;
+  border-top-left-radius: 10px; /* Rounded corners for the image */
+  border-top-right-radius: 10px;
+  -o-object-fit: cover;
+     object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.event h3 {
+  margin: 10px 0; /* Add some space around the title */
+  font-size: 14px; /* Increase font size */
+  text-align: left;
+  color: white;
+}
+
+.event h3:hover {
+  transition-duration: 0.3ms ease;
+}
+
+/*login page*/
+
+#login-main {
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  color: rgb(207, 185, 145);
+  margin-left: 25rem;
+  margin-top: 3.5rem;
+}
+
+
+#login-page h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#login-form {
+  width: 100%;
+  max-width: 30rem;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#login-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#login-form input[type=email],
+#login-form input[type=password],
+#login-form button[type=submit] { /* Apply styles to buttons */
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: none;
+  background-color: beige;
+}
+
+#login-form button[type=submit] {
+  width: 100%;
+  padding: 0.5rem; /* Adjust padding as needed */
+  background-color: rgb(207, 185, 145);
+  color: black;
+  border: none;
+  width: 420px;
+  cursor: pointer;
+}
+
+#login-page p {
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Styles for signup page */
+#styles_main {
+  width: 100%;
+  max-width: 400px; /* Adjust as needed */
+  color: rgb(207, 185, 145);
+  margin-left: 25rem;
+  margin-top: 3.5rem;
+}
+
+#signup-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+#signup-page h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+#signup-form {
+  width: 100%;
+  max-width: 30rem;
+  margin-bottom: 2rem;
+}
+
+#signup-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#signup-form input[type=text],
+#signup-form input[type=email],
+#signup-form input[type=password],
+#signup-form button[type=submit] { /* Apply styles to buttons */
+  width: 100%;
+  padding: 0.4rem;
+  margin-bottom: 1rem;
+  border: none;
+  background-color: beige;
+}
+
+#signup-form button[type=submit] {
+  width: 100%;
+  padding: 0.5rem; /* Adjust padding as needed */
+  background-color: rgb(207, 185, 145);;
+  color: black;
+  border: none;
+  width: 420px;
+  cursor: pointer;
+}
+
+.popup {
+  position: fixed;
+  top: 0; /* Position at the top of the viewport */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%);
+  width: 100%; /* Adjust width as needed */
+  max-width: 400px; /* Set maximum width */
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: block;
+  text-align: center; /* Center text horizontally */
+  font-size: 16px; /* Adjust font size as needed */
+}
+
+.login-link {
+  margin-top: -20px; /* Adjust the value as needed */
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.login-link a {
+  color: rgb(207, 185, 145);
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+.signup-link {
+  margin-top: -20px; /* Adjust the value as needed */
+  font-size: 0.8rem;
+  text-align: center;
+  margin-bottom: 90px;
+}
+
+.signup-link a {
+  color: rgb(207, 185, 145);
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
 // Dashboard elements end
 
 // Club elements start
-h1 {
-  margin: 0;
-}
-
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
-
-  .officer {
-    margin-bottom: 20px;
-
-    .mail {
-      font-weight: bold;
-      color: #00f;
-    }
-
-    .previous-page-button {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-  }
-}
-
-.club-container {
-  border: 1px solid #ddd;
-  margin: 10px;
-  padding: 10px;
-  background-color: rgb(184, 168, 77);
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(207, 119, 47, 0.8);
-  }
-
-  img {
-    width: 10%;
-    max-width: 10%;
-    height: auto;
-    max-height: 10%;
-  }
-}
 
 .popup {
   position: fixed;
@@ -225,7 +513,7 @@ h1 {
 }
 
 .popup img {
-  max-width: 100%;
+  max-width: 50%;
 }
 // Club elements end
 
@@ -234,10 +522,20 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 250px;
-  height: 250px;
   transition: transform 0.3s ease;
+  width: 100px; /* Fixed width for consistency */
+  height: 100px; /* Fixed height for consistency */
+  object-fit: cover; /* Ensures the image covers the entire area without distortion */
+  border-radius: 10px; /* Matches the border-radius of the container */
+  transition: transform 0.2s; 
 }
+
+.filtered-results {
+  padding: 40px;
+  margin: 40px; /* Adds space between the filter bar and the results */
+}
+
+
 .event-images img:hover {
   transform: scale(1.1); 
   filter: brightness(1.2);
@@ -263,15 +561,34 @@ h1 {
   text-align: center;
   background-color: white(0, 0, 0, 0.5);
   padding: 10px;
+  margin: 20px;
 }
 
+.club-title {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: white; /* White text for contrast against the black background */
+  margin-bottom: 10px; /* Space below the title */
+}
 .event-date, .event-description, .event-time, .event-location {
   text-decoration: none;
   color: white;
   text-align: center;
 }
 
-#ArtEvents{
+#categoryFilter {
+  margin: 40px;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+#categoryFilter option {
+  padding: 10px;
+}
+
+#ArtEvents, #clubs{
   border: #9a7b17;
 }
 .search-container {
@@ -313,10 +630,10 @@ input[type="submit"]:hover {
   background-color: rgba(207, 185, 145, 255);
 }
 
-.Banner{
+#Banner img{
   max-width: 100%;
   width: 100%;
-  height: 250px;
+  height: 400px;
 }
 
 .Events-Banner {
@@ -335,10 +652,10 @@ input[type="submit"]:hover {
   margin-right: 50px; // Adjust as needed
 }
 
-.ArtEvents, #YourEvents, #SearchResult{
+.ArtEvents, #YourEvents, #SearchResult, #FeaturedEvents, #clubs, #Clubs{
   background-color: black;
   padding: 20px;
-  margin: 20px;
+  margin: 30px;
   border-bottom: solid rgba(207, 185, 145, 255) 2px;
   display: flex;
   flex-wrap: wrap;
@@ -355,6 +672,11 @@ input[type="submit"]:hover {
   padding: 10px;
   border: solid rgba(207, 185, 145, 255) 2px;
   box-sizing: border-box; /* Include padding and border in the width calculation */
+  flex: 1 1 200px; /* Allow items to grow/shrink */
+  text-decoration: none; /* Remove underline */
+  color: #000;
+  text-align: center;
+  
 }
 
 #WorkshopsEvents-container, #Events-container {
@@ -394,4 +716,120 @@ input[type="submit"]:hover {
   left: 40%; 
   align-items: center;
   overflow: hidden;
+}
+
+//profile page//
+
+/*.student-profile .card {
+  border-radius: 10px;
+}*/
+
+.container {
+  margin-top: 10px;
+  background-color: black;
+  margin-left: 10px;
+  max-width: 350px; /* Adjust this value as needed */
+  height: 500px; /* Adjust the height as needed */
+  /*overflow-y: auto; /* Add vertical scrollbar if content overflows */
+  /* margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Border box styling for .card */
+.card {
+  margin-top: 20px;
+  border: 2px solid rgba(207, 185, 145, 255); /* Light gray border */
+  border-radius: 15px;
+  border-width: 5px;
+  height: 400px; /* Adjust the height as needed */
+  padding: 15px;
+}
+
+.student-profile .card .card-header .profile_img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 10px auto;
+  /*border: 4px solid rgba(207, 185, 145, 255);*/
+  border-radius: 50%;
+}
+
+.student-profile .card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color:rgba(207, 185, 145, 255);
+}
+
+.student-profile .card p {
+  font-size: 16px;
+  color: rgb(207, 185, 145);
+  cursor: pointer;
+}
+
+.student-profile .table th,
+.student-profile .table td {
+  font-size: 14px;
+  padding: 5px 10px;
+  color: rgb(207, 185, 145);
+}
+
+/* Additional styling for the update button */
+.update-button {
+  background-color: rgb(207, 185, 145);
+  color: black;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+/* Container for the update form */
+.update-form-container {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 25px;
+  border: 6px solid rgba(207, 185, 145, 255);
+  color:rgb(207, 185, 145);
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* Heading for the update form */
+.update-heading {
+  text-align: center;
+}
+
+/* Label styles for form inputs */
+.update-label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input styles for form inputs */
+.update-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: beige;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button styles for form submit button */
+.update-button {
+  width: 104%;
+  padding: 10px;
+  background-color: rgb(207, 185, 145);
+  color: black;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* Message styles for update success message */
+.update-message {
+  display: none;
+  text-align: center;
+  color:rgb(207, 185, 145);
 }
