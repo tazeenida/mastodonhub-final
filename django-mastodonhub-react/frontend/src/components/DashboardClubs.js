@@ -27,7 +27,7 @@ function ClubsPage() {
     };
 
     fetchClubs();
-  }, []); // Ensure this line has only one closing brace
+  }, []);
 
   const handleClubsClick = (club) => {
     console.log('Opening modal for', club);
