@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCheckLogin } from '../hooks/useCheckLogin'; 
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { useState, useEffect } from "react";
 
-const Navigation = () => {
-  const { isLoggedIn, isLoading } = useCheckLogin();
-
-  if (isLoading) {
-    return <div>Loading...</div>; // Display a loading message while checking login status
-  }
-
+export function Navigation() {
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('access_token') !== null) {
+       setIsAuth(true); 
+     }
+   }, [isAuth]);
   return(
   <nav className="main-nav">
     <div className="mastodon-label">
@@ -20,17 +22,21 @@ const Navigation = () => {
       <li><Link to="/Clubs">Clubs</Link></li>
     </ul>
     <div className="login-signup">
-    {isLoggedIn ? (
-          <>
-            <Link to="/Profile">Profile</Link> {/* When logged in, link to profile */}
-            <Link to="/Logout">Logout</Link> {/* Logout option */}
-          </>
-        ) : (
-          <>
-            <Link to="/Login">Login</Link> {/* Otherwise, show Login/Signup */}
-            <Link to="/Signup">Signup</Link>
-          </>
-        )}
+            <Nav>
+          {isAuth ? <Nav.Link href="/UserProfile">Profile</Nav.Link> :  
+
+                    <Nav.Link href="/Signup">Signup</Nav.Link>},               
+          </Nav>
+          <Navbar bg="dark" variant="dark">
+          <Nav className="me-auto"> 
+          </Nav>
+          <Nav>
+          {isAuth ? <Nav.Link href="/logout">Logout</Nav.Link> :  
+                    <Nav.Link href="/login">Login</Nav.Link>},
+                    
+          </Nav>
+          
+      </Navbar>
     </div>
   </nav>)
 };

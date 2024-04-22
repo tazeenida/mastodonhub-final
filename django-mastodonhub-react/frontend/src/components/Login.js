@@ -1,71 +1,81 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useCSRFToken } from './CSRFTokenContext';
-import { Link, useNavigate } from 'react-router-dom';
+// Import the react JS packages 
+import axios from "axios";
+import { useState } from "react";
 
-const Login = () => {
-  const csrfToken = useCSRFToken();
+// Define the Login function.
+export const Login = () => {
+     const [username, setUsername] = useState('');
+     const [password, setPassword] = useState('');
+     
+     const [errorMessage, setErrorMessage] = useState('');
 
-    const navigate = useNavigate();
+const submit = async (e) => {
+  e.preventDefault();
+  const user = { username, password };
 
-    const [loginData, setLoginData] = useState({
-        username: '',
-        password: '',
-    });
+  try {
+    const { data } = await axios.post(
+      'http://localhost:8000/token/',
+      user,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      }
+    );
 
-    const handleChange = (e) => {
-        setLoginData({ ...loginData, [e.target.name]: e.target.value });
-    };
-
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            console.log('Logging in user', loginData, csrfToken);
-            const response = await axios.post(
-                '/user/login/',
-                loginData,
-                {
-                    headers: {
-                        'X-CSRFToken': csrfToken,
-                    },
-                });
-            console.log('Login successful', response.data);
-            navigate('/');
-        } catch (error) {
-            console.error('Login failed', error);
-        }
-    };
-
-  
-
-  return (
-    <main id="login-main">
-      <h1 id="login-heading">Login</h1>
-      <form onSubmit={handleFormSubmit} id="login-form">
-        <label htmlFor="email" className="form-label">Username</label>
-        <input
-            type="text"
-            id="email" 
-            name="username"
-            value={loginData.username}
-            onChange={handleChange}
-            placeholder="Username"
-            required
-                />
-        <label htmlFor="password" className="form-label">Password</label>
-        <input 
-          type="password"
-          name="password"
-          value={loginData.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        <button type="submit" className="submit-btn">Login</button>
-      </form>
-      <p className="signup-link">Don't have an account?<Link className="signup-link" to="/Signup">Sign up</Link></p>
-    </main>
-  );
-
+    if (data.access && data.refresh) {
+      localStorage.clear();
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+      window.location.href = '/';
+    } else {
+      throw new Error('Invalid response format');
+    }
+  } catch (error) {
+    console.error('Login failed:', error);
+    alert('Login failed. Please try again.');
+  }
 };
+
+
+    return (
+      <div className="Auth-form-container">
+        <form className="Auth-form" onSubmit={submit}>
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Login</h3>
+            <div className="form-group mt-3">
+              <label>Username</label>
+              <input 
+                className="form-control mt-1" 
+                placeholder="Enter Username" 
+                name='username'  
+                type='text' 
+                value={username}
+                required 
+                onChange={e => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Password</label>
+              <input 
+                name='password' 
+                type="password"     
+                className="form-control mt-1"
+                placeholder="Enter password"
+                value={password}
+                required
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="d-grid gap-2 mt-3">
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </div>
+          </div>
+       </form>
+     </div>
+     );
+}
 export default Login;
