@@ -10,22 +10,15 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password 
 from .serializers import UserSerializer
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework_simplejwt.views import TokenRefreshView
+
 
 import logging
 logger = logging.getLogger(__name__)
 
 class LogoutView(APIView):
-    permission_classes = (IsAuthenticated,)
-
     def post(self, request):
-        try:
-            refresh_token = request.data["refresh_token"]
-            token = RefreshToken(refresh_token)  # Ensure correct import
-            token.blacklist()  # Blacklist the token
-            return Response(status=status.HTTP_205_RESET_CONTENT)  # Use proper status code
-        except Exception as e:
-            logger.error("Logout failed", exc_info=True)  # Log error for debugging
-            return Response(status=status.HTTP_401_UNAUTHORIZED)  # Handle exceptions
+        return Response({"message": "Successfully logged out"}, status=status.HTTP_200_OK)
 
 class SignUpView(APIView):
     def post(self, request):
