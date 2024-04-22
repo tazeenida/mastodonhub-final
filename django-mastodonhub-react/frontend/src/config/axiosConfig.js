@@ -1,5 +1,6 @@
 // axiosConfig.js
 import axios from 'axios';
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
 
 // Set up your Axios instance
 const axiosInstance = axios.create({
@@ -19,11 +20,11 @@ axiosInstance.interceptors.response.use(
       refresh = true;
 
       // Replace with your token refresh logic
-      const refreshToken = 'your-refresh-token'; // Retrieve your refresh token
-      const response = await axios.post('/refresh-token', { token: refreshToken });
+      const refreshToken = localStorage.getItem('refresh_token');
+      const response = await axios.post('/token/refresh/', { token: refreshToken });
 
       if (response.status === 200) {
-        const newToken = response.data.token;
+        localStorage.setItem('access_token', newToken);
         
         // Update your token storage
         localStorage.setItem('authToken', newToken);

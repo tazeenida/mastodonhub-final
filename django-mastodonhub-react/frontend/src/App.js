@@ -7,35 +7,53 @@ import Dashboard from './components/Dashboard';
 import Events from './components/Events';
 import Clubs from './components/ClubsPage';
 import Login from './components/Login';
+import Logout from './components/Logout';
 import Signup from './components/Signup';
-import { CSRFTokenProvider } from './components/CSRFTokenContext';
-import { useCheckLogin } from './hooks/useCheckLogin'; 
+import UserProfile from './components/UserProfile';
+
+const isLoggedIn = false;
 
 function App() {
-  const { isLoggedIn, isLoading } = useCheckLogin(); // Determine if user is logged in
+  const isLoggedIn = true; // example condition
+      if (!isLoggedIn) {
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Show loading while checking login status
-  }
+        return <Navigate to="/login" />;
+      }
+  const isSignedUp = true; // example condition
+      if (!isSignedUp) {
+
+        return <Navigate to="/signUp" />;
+      }
   return (
-    <CSRFTokenProvider>
     <div>
       <Router>
         <div>
           <Navigation/>
           <Routes>
-          <Route path="/" element={isLoggedIn ? <Dashboard />: <Navigate to="/Login" />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/" element={isLoggedIn ? <Dashboard />  : <Navigate to="/Dashboard" />} />
+          <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/Dashboard" />} />
             <Route path="/Events" element={<Events />} />
             <Route path="/Clubs" element={<Clubs/>} />
             <Route path="/Login" element={<Login />} />
+            <Route path="/Logout" element={<Logout />} />
+            <Route path="/UserProfile" element={<UserProfile />} />
             <Route path="/Signup" element={<Signup />} />
-          </Routes>
+            {isLoggedIn ? (
+          <>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </>
+        ) : (
+          <>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/signup" element={<Signup />} />
+          </>
+        )}
+        </Routes>
         </div>
+
       </Router>
       <Footer/>
     </div>
-    </CSRFTokenProvider>
   );
 }
 
